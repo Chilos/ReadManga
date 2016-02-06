@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="FreakCat.MangaReader.UI.Page0"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FreakCat.MangaReader.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:tile="using:FreakCat.MangaReader.UI.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interop="using:Windows.UI.Xaml.Interop"
+    DataContext="{Binding Page0, Source={StaticResource Locator}}"
+    mc:Ignorable="d">
+    <Grid Background="#448aff">
+        <ListView ItemsSource="{Binding Tiles}"
+                  x:Name="ListView"
+                  SelectionMode="None">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapGrid Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <tile:MenuTileControl Margin="5" 
+                                          Height="200"
+                                          Command="{Binding DataContext.ShowMangaInfo, ElementName=ListView}"
+                                          CommandParameter="{Binding}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </Grid>
+</Page>

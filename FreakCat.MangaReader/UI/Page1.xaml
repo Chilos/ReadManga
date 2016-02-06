@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="FreakCat.MangaReader.UI.Page1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FreakCat.MangaReader.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding Page1, Source={StaticResource Locator}}"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <TextBlock FontSize="40">
+            PAGE 1
+            </TextBlock>
+            <Button Command="{Binding GoBack}"
+                    FontSize="30">
+                GoBack
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Page>

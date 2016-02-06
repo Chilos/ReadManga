@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="FreakCat.MangaReader.UI.Page2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FreakCat.MangaReader.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding Page2, Source={StaticResource Locator}}"
+    mc:Ignorable="d">
+
+    <Grid Background="#448aff">
+          <RelativePanel>
+            <Image Name="MainImage"
+                   RelativePanel.AlignLeftWithPanel="True"
+                   Width="210"
+                   Height="300"
+                   Margin="50,50,0,0"
+                   Source="{Binding TileInfo.Image, Mode=TwoWay}"/>
+            <TextBlock RelativePanel.RightOf="MainImage"
+                       Name="Header"
+                       FontSize="36"
+                       Foreground="White"
+                       Margin="20,50,0,0"
+                       Text="{Binding TileInfo.Name, Mode=TwoWay}"/>
+            <TextBlock RelativePanel.RightOf="MainImage"
+                       RelativePanel.Below="Header"
+                       FontSize="28"
+                       Foreground="White"
+                       Margin="20,10,0,0"
+                       Text="{Binding TileInfo.RusName, Mode=TwoWay}"/>
+        </RelativePanel>
+    </Grid>
+</Page>

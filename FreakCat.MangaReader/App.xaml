@@ -1,0 +1,11 @@
+﻿<Application
+    x:Class="FreakCat.MangaReader.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FreakCat.MangaReader"
+    xmlns:viewModel="using:FreakCat.MangaReader.ViewModel"
+    RequestedTheme="Light">
+    <Application.Resources>
+        <viewModel:ViewModelLocator x:Key="Locator"/>
+    </Application.Resources>
+</Application>
