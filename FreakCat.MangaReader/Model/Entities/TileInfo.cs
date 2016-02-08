@@ -3,16 +3,9 @@ using Windows.UI.Xaml.Media;
 
 namespace FreakCat.MangaReader.Model.Entities 
 {
-    public class TileInfo
+    public class TileInfo : MangaIfoBase
     {
-        public ImageSource Image { get; set; }
-        public string Name { get; set; }
-        public string RusName { get; set; }
-        public string Description { get; set; }
-        public string Status { get; set; }
-
-
-        public ObservableCollection<Tag> Tags { get; set; }
+        public string UrlToInfo { get; set; }
 
         public TileInfo()
         {

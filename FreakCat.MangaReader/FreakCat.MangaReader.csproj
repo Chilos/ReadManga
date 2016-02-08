@@ -101,6 +101,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Entities\MangaIfoBase.cs" />
+    <Compile Include="Model\Entities\MangaInfo.cs" />
     <Compile Include="UI\Controls\MenuTileControl.xaml.cs">
       <DependentUpon>MenuTileControl.xaml</DependentUpon>
     </Compile>

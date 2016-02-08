@@ -105,18 +105,19 @@
                        Margin="5,5,0,0"
                        Text="{x:Bind Tile.Status}" 
                        Foreground="White"/>
-                <Border Height="2" Background="White"
-                        Opacity="0.7"
+                <Border Height="1" Background="White"
+                        Opacity="0.9"
                         Margin="5,5,0,0"/>
                 <TextBlock VerticalAlignment="Top"
-                       HorizontalAlignment="Left"
-                       FontSize="12"
-                       Width="{Binding ElementName=Status, Path=ActualWidth}"
-                       Margin="5,0,0,0"
-                       Text="{x:Bind Tile.Description}" 
-                       TextWrapping="WrapWholeWords" />
-                <Border Height="2" Background="White"
-                        Opacity="0.7"
+                           HorizontalAlignment="Left"
+                           FontSize="12"
+                           Width="{Binding ElementName=Status, Path=ActualWidth}"
+                           Margin="5,0,0,0"
+                           Foreground="White"
+                           Text="{x:Bind Tile.Description}"
+                           TextWrapping="WrapWholeWords" />
+                <Border Height="1" Background="White"
+                        Opacity="0.9"
                         Margin="5,2,0,5"/>
                 <ItemsControl ItemsSource="{x:Bind Tile.Tags}"
                           HorizontalAlignment="Left"

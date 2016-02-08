@@ -12,23 +12,36 @@ namespace FreakCat.MangaReader.ViewModel
     public class Page2ViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
-        private TileInfo _tileInfo;
+        private MangaInfo _pagesInfo;
         public Page2ViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             if (_navigationService.NavigatedParametr is TileInfo)
             {
-                TileInfo = (TileInfo)_navigationService.NavigatedParametr;              
+                var tileInfo = (TileInfo)_navigationService.NavigatedParametr;
+                PagesInfo = new MangaInfo()
+                {
+                    Name = tileInfo.Name,
+                    RusName = tileInfo.RusName,
+                    AnotherNames = "My love for you is always growing.",
+                    Status = tileInfo.Status,
+                    DownloadingStatus = "2 главы, перевод продолжается",
+                    Tags = tileInfo.Tags,
+                    Author = "Shirako, Shin5",
+                    Description = tileInfo.Description,
+                    Translater = "Alen Greed",
+                    Image = tileInfo.Image
+                };
             }
         }
 
-        public TileInfo TileInfo
+        public MangaInfo PagesInfo
         {
-            get { return _tileInfo; }
+            get { return _pagesInfo; }
             set
             {
-                _tileInfo = value;
-                RaisePropertyChanged(() => TileInfo);
+                _pagesInfo = value;
+                RaisePropertyChanged(() => PagesInfo);
             }
         }
 

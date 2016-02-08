@@ -5,9 +5,39 @@
     xmlns:local="using:FreakCat.MangaReader.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:WinRTXamlToolkit.Controls"
+    xmlns:entities="using:FreakCat.MangaReader.Model.Entities"
     DataContext="{Binding Page2, Source={StaticResource Locator}}"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <Style x:Key="TagStyle"
+               TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Name="Border" BorderThickness="1"
+                                    
+                                    CornerRadius="3"
+                                    BorderBrush="White">
+                                <Border.Background>
+                                    <SolidColorBrush x:Name="ColorBrush" Color="Transparent"/>
+                                </Border.Background>
+                                <TextBlock 
+                                           FontSize="20"
+                                           Margin="3,1,3,1"
+                                           Text="{TemplateBinding Content}">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush x:Name="ColorBrushForeground" Color="White"/>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+    </Page.Resources>
     <Grid Background="#448aff">
           <RelativePanel>
             <Image Name="MainImage"
@@ -15,19 +45,128 @@
                    Width="210"
                    Height="300"
                    Margin="50,50,0,0"
-                   Source="{Binding TileInfo.Image, Mode=TwoWay}"/>
+                   Source="{Binding PagesInfo.Image, Mode=TwoWay}"/>
+              <Border RelativePanel.RightOf="MainImage"
+                      Name="Header"
+                      Margin="20,50,0,0"
+                      Background="White"
+                      CornerRadius="10">
+                  <TextBlock
+                      FontSize="36"
+                      Margin="5,3,5,3"
+                      Foreground="#448aff"
+                      Text="{Binding PagesInfo.Name, Mode=TwoWay}" />
+              </Border>
             <TextBlock RelativePanel.RightOf="MainImage"
-                       Name="Header"
-                       FontSize="36"
-                       Foreground="White"
-                       Margin="20,50,0,0"
-                       Text="{Binding TileInfo.Name, Mode=TwoWay}"/>
-            <TextBlock RelativePanel.RightOf="MainImage"
+                       Name="RusHeader"
                        RelativePanel.Below="Header"
                        FontSize="28"
                        Foreground="White"
                        Margin="20,10,0,0"
-                       Text="{Binding TileInfo.RusName, Mode=TwoWay}"/>
+                       Text="{Binding PagesInfo.RusName, Mode=TwoWay}"/>
+            <TextBlock RelativePanel.RightOf="MainImage"
+                       Name="LbRusHeader"
+                       RelativePanel.Below="RusHeader"
+                       FontSize="22"
+                       Foreground="White"
+                       Margin="20,10,0,0"
+                       Text="Другие названия:"/>
+            <TextBlock RelativePanel.RightOf="LbRusHeader"
+                       RelativePanel.Below="RusHeader"
+                       Name="AnotherHeaders"
+                       FontSize="22"
+                       Foreground="White"
+                       Margin="20,10,0,0"
+                       Text="{Binding PagesInfo.AnotherNames, Mode=TwoWay}"/>
+            <TextBlock RelativePanel.RightOf="MainImage"
+                       Name="LbAuthors"
+                       RelativePanel.Below="LbRusHeader"
+                       FontSize="22"
+                       Foreground="White"
+                       Margin="20,10,0,0"
+                       Text="Авторы:"/>
+            <TextBlock RelativePanel.RightOf="LbRusHeader"
+                       Name="Authors"
+                       RelativePanel.Below="LbRusHeader"
+                       FontSize="22"
+                       Foreground="White"
+                       Margin="20,10,0,0"
+                       Text="{Binding PagesInfo.Author, Mode=TwoWay}"/>
+            <TextBlock RelativePanel.RightOf="MainImage"
+                       Name="LbStatus"
+                       RelativePanel.Below="LbAuthors"
+                       FontSize="22"
+                       Foreground="White"
+                       Margin="20,10,0,0"
+                       Text="Статус(Томов):"/>
+            <TextBlock RelativePanel.RightOf="LbRusHeader"
+                       Name="Status"
+                       RelativePanel.Below="LbAuthors"
+                       FontSize="22"
+                       Foreground="White"
+                       Margin="20,10,0,0"
+                       Text="{Binding PagesInfo.Status, Mode=TwoWay}"/>
+            <TextBlock RelativePanel.RightOf="MainImage"
+                       Name="LbDownloadingStatus"
+                       RelativePanel.Below="LbStatus"
+                       FontSize="22"
+                       Foreground="White"
+                       Margin="20,10,0,0"
+                       Text="Статус загрузок:"/>
+            <TextBlock RelativePanel.RightOf="LbRusHeader"
+                       Name="DownloadingStatus"
+                       RelativePanel.Below="LbStatus"
+                       FontSize="22"
+                       Foreground="White"
+                       Margin="20,10,0,0"
+                       Text="{Binding PagesInfo.DownloadingStatus, Mode=TwoWay}"/>
+            <TextBlock RelativePanel.RightOf="MainImage"
+                       Name="LbTags"
+                       RelativePanel.Below="LbDownloadingStatus"
+                       FontSize="22"
+                       Foreground="White"
+                       Margin="20,10,0,0"
+                       Text="Теги:"/>
+            <ItemsControl ItemsSource="{Binding PagesInfo.Tags, Mode=TwoWay}"
+                          HorizontalAlignment="Left"
+                          Name="Tags"
+                          RelativePanel.Below="DownloadingStatus"
+                          RelativePanel.RightOf="LbRusHeader"
+                          Margin="20,10,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <controls:WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Name}"
+                                Style="{StaticResource TagStyle}"
+                                Margin="2" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock RelativePanel.RightOf="MainImage"
+                       Name="LbTranslaters"
+                       RelativePanel.Below="Tags"
+                       FontSize="22"
+                       Foreground="White"
+                       Margin="20,10,0,0"
+                       Text="Переводчики:"/>
+            <TextBlock RelativePanel.RightOf="LbRusHeader"
+                       Name="Translaters"
+                       RelativePanel.Below="Tags"
+                       FontSize="22"
+                       Foreground="White"
+                       Margin="20,10,0,0"
+                       Text="{Binding PagesInfo.Translater, Mode=TwoWay}"/>
+            <TextBlock RelativePanel.AlignLeftWithPanel="True"
+                       Name="Description"
+                       RelativePanel.Below="Translaters"
+                       FontSize="22"
+                       Foreground="White"
+                       Margin="50,10,0,0"
+                       Text="{Binding PagesInfo.Description, Mode=TwoWay}"/>
         </RelativePanel>
     </Grid>
 </Page>
