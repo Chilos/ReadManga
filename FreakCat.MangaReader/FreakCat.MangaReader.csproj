@@ -92,17 +92,23 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\japan-s-anime-i-manga.jpg" />
     <Content Include="Resurces\images.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\1321717919865.jpg" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ParalaxConverter.cs" />
     <Compile Include="Model\Entities\MangaIfoBase.cs" />
     <Compile Include="Model\Entities\MangaInfo.cs" />
+    <Compile Include="UI\Controls\MenuTileControl1.xaml.cs">
+      <DependentUpon>MenuTileControl1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\MenuTileControl.xaml.cs">
       <DependentUpon>MenuTileControl.xaml</DependentUpon>
     </Compile>
@@ -150,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="UI\Controls\MenuTileControl1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Controls\MenuTileControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

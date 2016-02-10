@@ -6,29 +6,46 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:tile="using:FreakCat.MangaReader.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:FreakCat.MangaReader.Converters"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interop="using:Windows.UI.Xaml.Interop"
     DataContext="{Binding Page0, Source={StaticResource Locator}}"
     mc:Ignorable="d">
     <Grid Background="#448aff">
-        <ListView ItemsSource="{Binding Tiles}"
+        <Grid.Resources>
+            <converter:ParallaxConverter x:Key="Parallax"/>
+        </Grid.Resources>
+        <Image Source="/Assets/1321717919865.jpg" 
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Stretch="UniformToFill"
+               Height="1500"
+               Margin="0,0,0,-780">
+            <Image.RenderTransform>
+                <CompositeTransform
+                    TranslateY="{Binding ElementName=MainScrollViewer, Path=VerticalOffset, Converter={StaticResource Parallax}, ConverterParameter=-0.10}" />
+            </Image.RenderTransform>
+        </Image>
+        <ScrollViewer x:Name="MainScrollViewer" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled">
+            <ListView ItemsSource="{Binding Tiles}"
                   x:Name="ListView"
                   SelectionMode="None">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapGrid Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <tile:MenuTileControl Margin="5" 
-                                          Height="200"
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapGrid Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <tile:MenuTileControl1 Margin="5" 
+                                          Height="300"
                                           Command="{Binding DataContext.ShowMangaInfo, ElementName=ListView}"
                                           CommandParameter="{Binding}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
-        </ListView>
+            </ListView>
+        </ScrollViewer>
     </Grid>
 </Page>

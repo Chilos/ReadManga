@@ -28,34 +28,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <RelativePanel Background="#0b5b96">
-            <Button Name="HamburgerButton"
-                    RelativePanel.AlignLeftWithPanel="True"
-                    FontFamily="Segoe MDL2 Assets"
-                    Background="#0063b1"
-                    Style="{StaticResource HamburgerButton}"
-                    Content="&#xe700;"
-                    HorizontalAlignment="Center"
-                    Command="{Binding HamburgerCommand}"/>
-            <Button Name="BackButton"
-                    Background="#0b5b96"
-                    RelativePanel.RightOf="HamburgerButton"
-                    FontFamily="Segoe MDL2 Assets"
-                    Visibility="{Binding GoBackVisible}"
-                    Style="{StaticResource HamburgerButton}"
-                    Content="&#xE72B;"
-                    HorizontalAlignment="Center"
-                    Command="{Binding GoBack}"/>
-            <Grid RelativePanel.RightOf="BackButton"
-                  Height="50">
-                <TextBlock 
-                       Text="{Binding HeaderText, Mode=TwoWay}"
-                       FontSize="24"
-                       Foreground="White"
-                       Margin="20,0,0,0"
-                       VerticalAlignment="Center"/>
-            </Grid>
-        </RelativePanel>
+
 
         <SplitView Grid.Row="1"
                    Name="MainSplitView"
@@ -96,6 +69,33 @@
                        Content="{Binding FrameContent, Mode=TwoWay}"/>
             </SplitView.Content>
         </SplitView>
-
+        <RelativePanel Grid.Row="0"  Background="#0b5b96">
+            <Button Name="HamburgerButton"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    FontFamily="Segoe MDL2 Assets"
+                    Background="#0063b1"
+                    Style="{StaticResource HamburgerButton}"
+                    Content="&#xe700;"
+                    HorizontalAlignment="Center"
+                    Command="{Binding HamburgerCommand}"/>
+            <Button Name="BackButton"
+                    Background="#0b5b96"
+                    RelativePanel.RightOf="HamburgerButton"
+                    FontFamily="Segoe MDL2 Assets"
+                    Visibility="{Binding GoBackVisible}"
+                    Style="{StaticResource HamburgerButton}"
+                    Content="&#xE72B;"
+                    HorizontalAlignment="Center"
+                    Command="{Binding GoBack}"/>
+            <Grid RelativePanel.RightOf="BackButton"
+                  Height="50">
+                <TextBlock 
+                       Text="{Binding HeaderText, Mode=TwoWay}"
+                       FontSize="24"
+                       Foreground="White"
+                       Margin="20,0,0,0"
+                       VerticalAlignment="Center"/>
+            </Grid>
+        </RelativePanel>
     </Grid>
 </Page>
