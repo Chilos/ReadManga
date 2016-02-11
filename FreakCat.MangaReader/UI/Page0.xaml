@@ -16,8 +16,9 @@
         <Grid.Resources>
             <converter:ParallaxConverter x:Key="Parallax"/>
         </Grid.Resources>
-        <Image Source="/Assets/1321717919865.jpg" 
+        <Image Source="/Assets/tsukin_zajiro.jpg" 
                HorizontalAlignment="Left"
+               Opacity="0.3"
                VerticalAlignment="Top"
                Stretch="UniformToFill"
                Height="1500"

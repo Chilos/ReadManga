@@ -8,4 +8,5 @@
     <Application.Resources>
         <viewModel:ViewModelLocator x:Key="Locator"/>
     </Application.Resources>
+    
 </Application>

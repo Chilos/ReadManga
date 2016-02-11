@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace FreakCat.MangaReader.ViewModel
     {
         private readonly INavigationService _navigationService;
         private MangaInfo _pagesInfo;
+        public ObservableCollection<Chapter> Chapters { get; set; } 
         public Page2ViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
@@ -32,6 +34,9 @@ namespace FreakCat.MangaReader.ViewModel
                     Translater = "Alen Greed",
                     Image = tileInfo.Image
                 };
+                Chapters = new ObservableCollection<Chapter>();
+                Chapters.Add(new Chapter() {Date = DateTime.Today, Name = "#shin5 - Kekkonshite mo Koishiteru   v1 - 1" });
+                Chapters.Add(new Chapter() { Date = DateTime.Today, Name = "#shin5 - Kekkonshite mo Koishiteru   v1 - 2" });
             }
         }
 

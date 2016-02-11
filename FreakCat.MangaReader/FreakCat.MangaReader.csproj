@@ -93,6 +93,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\japan-s-anime-i-manga.jpg" />
+    <Content Include="Assets\tsukin_zajiro.jpg" />
     <Content Include="Resurces\images.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -104,6 +105,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ParalaxConverter.cs" />
+    <Compile Include="Model\Entities\Chapter.cs" />
     <Compile Include="Model\Entities\MangaIfoBase.cs" />
     <Compile Include="Model\Entities\MangaInfo.cs" />
     <Compile Include="UI\Controls\MenuTileControl1.xaml.cs">
