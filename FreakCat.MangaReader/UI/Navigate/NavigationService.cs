@@ -11,6 +11,9 @@ namespace FreakCat.MangaReader.UI.Navigate
     public class NavigationService : INavigationService
     {
         private Frame _frame;
+
+        public Frame CurrentFrame => _frame;
+
         public NavigationService(Frame frame)
         {
             _frame = frame;

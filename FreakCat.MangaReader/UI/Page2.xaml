@@ -40,7 +40,7 @@
             </Style>
         <converters:ParallaxConverter x:Key="Parallax"/>
     </Page.Resources>
-    <Grid Background="#448aff">
+    <Grid Background="#feeed7">
         <Image Source="/Assets/tsukin_zajiro.jpg" 
                HorizontalAlignment="Left"
                Opacity="0.3"
@@ -226,7 +226,8 @@
                             Margin="50,0,0,0"
                             RelativePanel.AlignLeftWithPanel="True"
                             RelativePanel.Below="MainImage"
-                            RelativePanel.Above="Description" Width="250"/>
+                            RelativePanel.Above="Description" Width="250"
+                            Command="{Binding ToReadCommand}"/>
                     <Grid RelativePanel.AlignLeftWithPanel="True"
                           RelativePanel.AlignRightWithPanel="True"
                           Margin="50,10,50,0"

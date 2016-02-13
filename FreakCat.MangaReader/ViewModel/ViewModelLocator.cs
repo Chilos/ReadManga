@@ -16,6 +16,7 @@ namespace FreakCat.MangaReader.ViewModel
     {
         public MainPageViewModel MainPage => SimpleIoc.Default.GetInstance<MainPageViewModel>();
 
+        public Page3ViewModel Page3 => SimpleIoc.Default.GetInstance<Page3ViewModel>();
         public Page2ViewModel Page2 => SimpleIoc.Default.GetInstance<Page2ViewModel>();
         public Page1ViewModel Page1 => SimpleIoc.Default.GetInstance<Page1ViewModel>();
         public Page0ViewModel Page0 => SimpleIoc.Default.GetInstance<Page0ViewModel>();
@@ -28,6 +29,7 @@ namespace FreakCat.MangaReader.ViewModel
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
 
             SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<Page3ViewModel>();
             SimpleIoc.Default.Register<Page2ViewModel>();
             SimpleIoc.Default.Register<Page1ViewModel>();
             SimpleIoc.Default.Register<Page0ViewModel>();
@@ -40,6 +42,7 @@ namespace FreakCat.MangaReader.ViewModel
             var navigationService = new NavigationService(frame);
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
             SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<Page3ViewModel>();
             SimpleIoc.Default.Register<Page2ViewModel>();
             SimpleIoc.Default.Register<Page1ViewModel>();
             SimpleIoc.Default.Register<Page0ViewModel>();

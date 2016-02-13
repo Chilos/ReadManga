@@ -35,7 +35,7 @@
                    DisplayMode="CompactOverlay"
                    OpenPaneLength="250"
                    CompactPaneLength="50"                   
-                   PaneBackground="#2b2b2b"
+                   PaneBackground="#413c35"
                    IsPaneOpen="{Binding IsOpenPanel, Mode=TwoWay}">
             <SplitView.Pane>
                 <StackPanel>
@@ -69,17 +69,17 @@
                        Content="{Binding FrameContent, Mode=TwoWay}"/>
             </SplitView.Content>
         </SplitView>
-        <RelativePanel Grid.Row="0"  Background="#0b5b96">
+        <RelativePanel Grid.Row="0"  Background="#524a3e">
             <Button Name="HamburgerButton"
                     RelativePanel.AlignLeftWithPanel="True"
                     FontFamily="Segoe MDL2 Assets"
-                    Background="#0063b1"
+                    Background="#5d5447"
                     Style="{StaticResource HamburgerButton}"
                     Content="&#xe700;"
                     HorizontalAlignment="Center"
                     Command="{Binding HamburgerCommand}"/>
             <Button Name="BackButton"
-                    Background="#0b5b96"
+                    Background="#5d5447"
                     RelativePanel.RightOf="HamburgerButton"
                     FontFamily="Segoe MDL2 Assets"
                     Visibility="{Binding GoBackVisible}"

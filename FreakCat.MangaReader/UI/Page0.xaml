@@ -12,7 +12,7 @@
     xmlns:interop="using:Windows.UI.Xaml.Interop"
     DataContext="{Binding Page0, Source={StaticResource Locator}}"
     mc:Ignorable="d">
-    <Grid Background="#448aff">
+    <Grid Background="#feeed7">
         <Grid.Resources>
             <converter:ParallaxConverter x:Key="Parallax"/>
         </Grid.Resources>

@@ -4,9 +4,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using FreakCat.MangaReader.Model.Entities;
+using FreakCat.MangaReader.UI;
 using FreakCat.MangaReader.UI.Navigate;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace FreakCat.MangaReader.ViewModel
 {
@@ -14,6 +19,7 @@ namespace FreakCat.MangaReader.ViewModel
     {
         private readonly INavigationService _navigationService;
         private MangaInfo _pagesInfo;
+        private ICommand _toReadCommand;
         public ObservableCollection<Chapter> Chapters { get; set; } 
         public Page2ViewModel(INavigationService navigationService)
         {
@@ -37,6 +43,18 @@ namespace FreakCat.MangaReader.ViewModel
                 Chapters = new ObservableCollection<Chapter>();
                 Chapters.Add(new Chapter() {Date = DateTime.Today, Name = "#shin5 - Kekkonshite mo Koishiteru   v1 - 1" });
                 Chapters.Add(new Chapter() { Date = DateTime.Today, Name = "#shin5 - Kekkonshite mo Koishiteru   v1 - 2" });
+            }
+        }
+
+        public ICommand ToReadCommand
+        {
+            get
+            {
+                return _toReadCommand ?? (_toReadCommand = new RelayCommand(()=>
+                {
+                    _navigationService.Navigate(typeof(Page3), (Frame)Window.Current.Content);
+
+                }));
             }
         }
 

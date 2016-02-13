@@ -129,12 +129,16 @@
     <Compile Include="UI\Page2.xaml.cs">
       <DependentUpon>Page2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Page3.xaml.cs">
+      <DependentUpon>Page3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\Page0ViewModel.cs" />
     <Compile Include="ViewModel\Page1ViewModel.cs" />
     <Compile Include="ViewModel\Page2ViewModel.cs" />
     <Compile Include="Model\Entities\Tag.cs" />
     <Compile Include="Model\Entities\TileInfo.cs" />
+    <Compile Include="ViewModel\Page3ViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Page2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Page3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
