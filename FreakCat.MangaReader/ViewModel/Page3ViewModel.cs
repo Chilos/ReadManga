@@ -30,7 +30,7 @@ namespace FreakCat.MangaReader.ViewModel
             {
                 return _goBack ?? (_goBack = new RelayCommand(() =>
                 {
-                    //_navigationService.Navigate(typeof(MainPageView), (Frame)Window.Current.Content);
+                    _navigationService.GoBack();
 
                 }));
             }

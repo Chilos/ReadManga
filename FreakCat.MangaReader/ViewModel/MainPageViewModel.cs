@@ -15,12 +15,15 @@ namespace FreakCat.MangaReader.ViewModel
         private ICommand _page1Click;
         private ICommand _hamburgerCommand;
         private ICommand _onLoaded;
+        private ICommand _onFrameNavigatedCommand;
         private ICommand _goBack;
         private bool _isOpenPanel;
+        private double _isLeftPanelVisible;
+        private bool _isTopPanelVisible;
         private bool _btnCatalogChecked;
         private bool _btnAnotherChecked;
         private string _headerText;
-        private Visibility _goBackVisible;
+        private bool _goBackVisible;
 
 
         private Page _frameContent;
@@ -29,6 +32,8 @@ namespace FreakCat.MangaReader.ViewModel
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+            IsLeftPanelVisible = 50;
+            IsTopPanelVisible = true;
 
         }
 
@@ -42,7 +47,27 @@ namespace FreakCat.MangaReader.ViewModel
             }
         }
 
-        public Visibility GoBackVisible
+        public double IsLeftPanelVisible
+        {
+            get { return _isLeftPanelVisible; }
+            set
+            {
+                _isLeftPanelVisible = value;
+                RaisePropertyChanged(()=> IsLeftPanelVisible);
+            }
+        }
+
+        public bool IsTopPanelVisible
+        {
+            get { return _isTopPanelVisible; }
+            set
+            {
+                _isTopPanelVisible = value;
+                RaisePropertyChanged(() => IsTopPanelVisible);
+            }
+        }
+
+        public bool GoBackVisible
         {
             get { return _goBackVisible; }
             set
@@ -88,38 +113,14 @@ namespace FreakCat.MangaReader.ViewModel
             set
             {
                 _frameContent = value;
-                ChangeMenuBattons(_frameContent);
-               
                 RaisePropertyChanged(() => FrameContent);
             }
         }
 
-        private void ChangeMenuBattons(Page frameContent)
-        {
-            if (frameContent is Page0)
-            {
-                HeaderText = "Page 0";
-                BtnCatalogChecked = true;
-            }
-
-            if (frameContent is Page1)
-            {
-                HeaderText = "Page 1";
-                BtnAnotherChecked = true;
-            }
-            if (frameContent is Page2)
-            {
-                HeaderText = "Page 2";
-                BtnCatalogChecked = true;
-                GoBackVisible = Visibility.Visible;
-            }
-
-
-        }
 
         private void ChangeGoBackVisible()
         {
-            GoBackVisible = _navigationService.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
+            GoBackVisible = _navigationService.CanGoBack;
         }
 
         public ICommand GoBack
@@ -130,6 +131,43 @@ namespace FreakCat.MangaReader.ViewModel
                 {
                     _navigationService.GoBack();
                     ChangeGoBackVisible();
+                }));
+            }
+        }
+
+        public ICommand OnNavigatedCommand
+        {
+            get
+            {
+                return _onFrameNavigatedCommand ?? (_onFrameNavigatedCommand = new RelayCommand(() =>
+                {
+                    IsLeftPanelVisible = 50;
+                    IsTopPanelVisible = true;
+                    if (FrameContent is Page0)
+                    {
+                        HeaderText = "Page 0";
+                        BtnCatalogChecked = true;
+                    }
+
+                    if (FrameContent is Page1)
+                    {
+                        HeaderText = "Page 1";
+                        BtnAnotherChecked = true;
+                    }
+                    if (FrameContent is Page2)
+                    {
+                        HeaderText = "Page 2";
+                        BtnCatalogChecked = true;
+                        GoBackVisible = true;                        
+                    }
+                    if (FrameContent is Page3)
+                    {
+                        HeaderText = "Page 3";
+                        BtnCatalogChecked = true;
+                        GoBackVisible = true;
+                        IsLeftPanelVisible = 0;
+                        IsTopPanelVisible = false;
+                    }
                 }));
             }
         }

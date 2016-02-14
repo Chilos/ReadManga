@@ -52,7 +52,7 @@ namespace FreakCat.MangaReader.ViewModel
             {
                 return _toReadCommand ?? (_toReadCommand = new RelayCommand(()=>
                 {
-                    _navigationService.Navigate(typeof(Page3), (Frame)Window.Current.Content);
+                    _navigationService.Navigate(typeof(Page3));
 
                 }));
             }

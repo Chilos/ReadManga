@@ -4,12 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:FreakCat.MangaReader.Converters"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
-
-
-   
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -23,6 +21,9 @@
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <converter:VisibleConverter x:Key="VisibleConverter"/>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -34,8 +35,8 @@
                    Name="MainSplitView"
                    DisplayMode="CompactOverlay"
                    OpenPaneLength="250"
-                   CompactPaneLength="50"                   
-                   PaneBackground="#413c35"
+                   CompactPaneLength="{Binding IsLeftPanelVisible, Mode=TwoWay}"                   
+                   PaneBackground="#413c35"                   
                    IsPaneOpen="{Binding IsOpenPanel, Mode=TwoWay}">
             <SplitView.Pane>
                 <StackPanel>
@@ -66,10 +67,18 @@
             <SplitView.Content>
                 <Frame Grid.Row="1"
                        Name="CurrentFrame"
-                       Content="{Binding FrameContent, Mode=TwoWay}"/>
+                       Content="{Binding FrameContent, Mode=TwoWay}">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Navigated">
+                            <core:InvokeCommandAction Command="{Binding OnNavigatedCommand}" />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </Frame>
             </SplitView.Content>
         </SplitView>
-        <RelativePanel Grid.Row="0"  Background="#524a3e">
+        <RelativePanel Grid.Row="0"
+                       Background="#524a3e"
+                       Visibility="{Binding IsTopPanelVisible, Mode=TwoWay, Converter={StaticResource VisibleConverter}}">
             <Button Name="HamburgerButton"
                     RelativePanel.AlignLeftWithPanel="True"
                     FontFamily="Segoe MDL2 Assets"
@@ -82,7 +91,7 @@
                     Background="#5d5447"
                     RelativePanel.RightOf="HamburgerButton"
                     FontFamily="Segoe MDL2 Assets"
-                    Visibility="{Binding GoBackVisible}"
+                    Visibility="{Binding GoBackVisible, Converter={StaticResource VisibleConverter}}"
                     Style="{StaticResource HamburgerButton}"
                     Content="&#xE72B;"
                     HorizontalAlignment="Center"

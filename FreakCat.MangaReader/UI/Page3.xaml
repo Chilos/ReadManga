@@ -10,9 +10,11 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Button Command="{Binding OnLoadCommand}"
+                HorizontalAlignment="Center"
                 Content="Fullscreen" />
         <Button Command="{Binding GoBack}"
                 VerticalAlignment="Bottom"
+                HorizontalAlignment="Center"
                 Content="Back" />
     </Grid>
 </Page>
