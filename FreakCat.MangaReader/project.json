@@ -6,7 +6,8 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.0.3",
     "MvvmLightLibs": "5.2.0",
-    "winrtxamltoolkit": "1.6.1.3"
+    "winrtxamltoolkit": "1.6.1.3",
+    "WriteableBitmapEx": "1.5.0"
   },
   "frameworks": {
     "uap10.0": {}

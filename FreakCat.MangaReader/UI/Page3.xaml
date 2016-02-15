@@ -5,8 +5,15 @@
     xmlns:local="using:FreakCat.MangaReader.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     DataContext="{Binding Page3, Source={StaticResource Locator}}"
     mc:Ignorable="d">
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding OnLoadCommand}"/>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,54 +21,57 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-    <FlipView Background="White"
-              ItemsSource="{Binding ImageCollection}">
-        <FlipView.ItemTemplate>
-            <DataTemplate>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition/>
-                        <RowDefinition Height="100"/>
-                    </Grid.RowDefinitions>
-                    <Image Grid.RowSpan="3"
-                           Source="{Binding Image}"/>
-                    <Grid Grid.Row="0">
-                        <Grid Background="Black"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <FlipView Background="White"
+              Grid.RowSpan="3"
+              ItemsSource="{Binding ImageCollection}"
+              SelectedItem="{Binding SelectedImage, Mode=TwoWay}">
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Image 
+                           Source="{Binding Image, Mode=TwoWay}"/>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
+        <Grid Grid.Row="0">
+            <Grid Background="Black"
                   Opacity=".5"/>
-                        <!--<Button 
+            <Button 
                     Background="#5d5447"
                     VerticalAlignment="Top"
                     FontFamily="Segoe MDL2 Assets"
                     Style="{StaticResource HamburgerButton}"
                     Content="&#xE72B;"
                     HorizontalAlignment="Left"
-                    Command="{Binding GoBack}"/>-->
-                        <TextBlock Foreground="White"
+                    Command="{Binding GoBack}"/>
+            <TextBlock Foreground="White"
                        FontSize="28"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       Text="{Binding Title}"/>
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <Grid Background="Black"
+                       Text="{Binding SelectedImage.Title}"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid Background="Black"
                   Opacity=".5"/>
-                        <TextBlock Foreground="White"
+            <TextBlock Foreground="White"
                        FontSize="28"
                        Margin="0,0,0,10"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Bottom"
-                       Text="{Binding Chapter}"/>
-                        <TextBlock Foreground="White"
+                       Text="{Binding SelectedImage.Chapter}"/>
+            <TextBlock Foreground="White"
                        FontSize="28"
                        Margin="0,10,0,0"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"
-                       Text="{Binding PageNamber}"/>
-                    </Grid>
-                </Grid>
-            </DataTemplate>
-        </FlipView.ItemTemplate>
-    </FlipView>
+                       Text="{Binding SelectedImage.PageNamber}"/>
+        </Grid>
     
+
+    </Grid>
 </Page>
