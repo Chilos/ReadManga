@@ -108,6 +108,7 @@
     <Compile Include="Converters\VisibleConverter.cs" />
     <Compile Include="Model\Entities\Chapter.cs" />
     <Compile Include="Model\Entities\MangaIfoBase.cs" />
+    <Compile Include="Model\Entities\MangaImage.cs" />
     <Compile Include="Model\Entities\MangaInfo.cs" />
     <Compile Include="UI\Controls\MenuTileControl1.xaml.cs">
       <DependentUpon>MenuTileControl1.xaml</DependentUpon>
@@ -197,7 +198,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WebP for the UWP, Version=1.0">
+      <Name>WebP for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
