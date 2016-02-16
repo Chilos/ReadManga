@@ -12,6 +12,11 @@
     xmlns:interop="using:Windows.UI.Xaml.Interop"
     DataContext="{Binding Page0, Source={StaticResource Locator}}"
     mc:Ignorable="d">
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding OnLoadCommand}"/>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
     <Grid Background="#feeed7">
         <Grid.Resources>
             <converter:ParallaxConverter x:Key="Parallax"/>
@@ -29,7 +34,7 @@
             </Image.RenderTransform>
         </Image>
         <ScrollViewer x:Name="MainScrollViewer" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled">
-            <ListView ItemsSource="{Binding Tiles}"
+            <ListView ItemsSource="{Binding Tiles, Mode=TwoWay}"
                   x:Name="ListView"
                   SelectionMode="None">
                 <ListView.ItemsPanel>

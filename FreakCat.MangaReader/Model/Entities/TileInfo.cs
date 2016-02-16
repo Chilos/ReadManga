@@ -1,11 +1,13 @@
 using System.Collections.ObjectModel;
-using Windows.UI.Xaml.Media;
 
 namespace FreakCat.MangaReader.Model.Entities 
 {
     public class TileInfo : MangaIfoBase
     {
         public string UrlToInfo { get; set; }
+        public int ChapterCount { get; set; }
+        public bool IsEnded { get; set; }
+        public bool IsSingle { get; set; }
 
         public TileInfo()
         {

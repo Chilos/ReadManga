@@ -5,6 +5,7 @@
     xmlns:local="using:FreakCat.MangaReader.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:toolkit="using:WinRTXamlToolkit.Controls"
+    xmlns:converter="using:FreakCat.MangaReader.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
@@ -16,6 +17,9 @@
             <core:InvokeCommandAction Command="{x:Bind Command, Mode=TwoWay}" CommandParameter="{Binding}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
+    <UserControl.Resources>
+        <converter:VisibleConverter x:Key="VisibleConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Image VerticalAlignment="Top"
                    Width="213"
@@ -27,19 +31,19 @@
                 <Border Background="Black"
                         Opacity="0.5"
                         Width="213"
-                        Height="70"/>
+                        Height="100"/>
                 <StackPanel>
-                <TextBlock x:Name="Name"
+                    <TextBlock x:Name="Name"
                                HorizontalAlignment="Center"
-                               Margin="5,0,0,0"
-                               FontSize="14"
+                               Margin="0,10,0,0"
+                               FontSize="18"
                                Text="{x:Bind Tile.Name}"
                                Foreground="White" 
                                TextWrapping="WrapWholeWords" />
-                <TextBlock x:Name="RusName"
+                    <TextBlock x:Name="RusName"
                                HorizontalAlignment="Center"
-                               Margin="5,0,0,0"
-                               FontSize="12"
+                               Margin="0,5,0,0"
+                               FontSize="14"
                                TextWrapping="WrapWholeWords"
                                Text="{x:Bind Tile.RusName}"
                                Foreground="White" />
@@ -56,9 +60,10 @@
                     <TextBlock Foreground="White"
                                FontSize="18"
                                HorizontalAlignment="Center"
-                               Text="88" />
+                               Text="{x:Bind Tile.ChapterCount}" />
                 </Grid>
-                <Grid Margin="0,0,0,10">
+                <Grid Margin="0,0,0,10"
+                      Visibility="{x:Bind Tile.IsSingle, Converter={StaticResource VisibleConverter}}">
                     <Border Width="45"
                             Height="25"
                             Background="Black"
@@ -68,74 +73,20 @@
                                HorizontalAlignment="Center"
                                Text="C" />
                 </Grid>
-                <Grid Margin="0,0,0,10">
+                <Grid Margin="0,0,0,10"
+                      Visibility="{x:Bind Tile.IsEnded, Converter={StaticResource VisibleConverter}}">
                     <Border Width="45"
                             Height="25"
                             Background="Black"
                             Opacity="0.5" />
                     <TextBlock Foreground="White"
                                FontSize="18"
+                               Margin="0,5,0,0"
                                HorizontalAlignment="Center"
                                FontFamily="Segoe MDL2 Assets"
                                Text="&#xE73E;" />
                 </Grid>
             </StackPanel>
         </RelativePanel>
-  
-        
-        <!--<StackPanel>
-                <TextBlock x:Name="Name"
-                       VerticalAlignment="Top"
-                       HorizontalAlignment="Left"
-                       Margin="5,0,0,0"
-                       FontSize="16"
-                       Text="{x:Bind Tile.Name}"
-                       Foreground="White"/>
-                <TextBlock VerticalAlignment="Top"
-                       HorizontalAlignment="Left"
-                       FontSize="12"
-                       Margin="5,5,0,0"
-                       Text="{x:Bind Tile.RusName}" 
-                       Foreground="White"/>
-                <TextBlock VerticalAlignment="Top"
-                       HorizontalAlignment="Left"
-                       Name="Status"
-                       FontSize="12"
-                       Margin="5,5,0,0"
-                       Text="{x:Bind Tile.Status}" 
-                       Foreground="White"/>
-                <Border Height="1" Background="White"
-                        Opacity="0.9"
-                        Margin="5,5,0,0"/>
-                <TextBlock VerticalAlignment="Top"
-                           HorizontalAlignment="Left"
-                           FontSize="12"
-                           Width="{Binding ElementName=Status, Path=ActualWidth}"
-                           Margin="5,0,0,0"
-                           Foreground="White"
-                           Text="{x:Bind Tile.Description}"
-                           TextWrapping="WrapWholeWords" />
-                <Border Height="1" Background="White"
-                        Opacity="0.9"
-                        Margin="5,2,0,5"/>
-                <ItemsControl ItemsSource="{x:Bind Tile.Tags}"
-                          HorizontalAlignment="Left"
-                          Margin="5,5,0,0">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <toolkit:WrapPanel Orientation="Horizontal"
-                                           Width="{Binding ElementName=Name, Path=ActualWidth}"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button Content="{Binding Name}"
-                                Style="{StaticResource TagStyle}"
-                                Margin="2"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>-->
- 
     </Grid>
 </UserControl>
