@@ -56,7 +56,8 @@ namespace FreakCat.MangaReader.Parsers
                 IsEnded = IsEndedStatus(GetStatusesHtml(htmlTile)),
                 IsSingle = IsSingleStatus(GetStatusesHtml(htmlTile)),
                 ChapterCount = Convert.ToInt32(GetChapterCount(GetStatusesHtml(htmlTile))),
-                Image = await GetImage(ParseImageUrl(htmlTile))
+                Image = await GetImage(ParseImageUrl(htmlTile)),
+                UrlToInfo = ParseUrl(htmlTile)
             };
         }
 
@@ -102,6 +103,14 @@ namespace FreakCat.MangaReader.Parsers
             string patrn = "<img(\\W*)src=\"(.*?)\"";
             Regex r = new Regex(patrn, RegexOptions.Multiline);
             return SITE_URL+r.Match(htmlTile).Groups[2].Value;
+        }
+
+        private string ParseUrl(string htmlTile)
+        {
+            //<a href="/manga/17625--okazaki-mari.html">
+            string patrn = "<a href=\"(.*?)\">";
+            Regex r = new Regex(patrn, RegexOptions.Multiline);
+            return SITE_URL + r.Match(htmlTile).Groups[1].Value;
         }
         private async Task<BitmapImage> GetImage(string url)
         {

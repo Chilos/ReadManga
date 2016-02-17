@@ -111,6 +111,7 @@
     <Compile Include="Model\Entities\MangaImage.cs" />
     <Compile Include="Model\Entities\MangaInfo.cs" />
     <Compile Include="Parsers\MangachanCatalogPaser.cs" />
+    <Compile Include="Parsers\MangachanInfoParser.cs" />
     <Compile Include="UI\Controls\MenuTileControl1.xaml.cs">
       <DependentUpon>MenuTileControl1.xaml</DependentUpon>
     </Compile>

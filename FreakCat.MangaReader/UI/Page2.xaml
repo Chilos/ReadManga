@@ -8,8 +8,15 @@
     xmlns:controls="using:WinRTXamlToolkit.Controls"
     xmlns:entities="using:FreakCat.MangaReader.Model.Entities"
     xmlns:converters="using:FreakCat.MangaReader.Converters"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     DataContext="{Binding Page2, Source={StaticResource Locator}}"
     mc:Ignorable="d">
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding OnLoadCommand}"/>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
     <Page.Resources>
         <Style x:Key="TagStyle"
                TargetType="Button">
