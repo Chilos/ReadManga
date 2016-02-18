@@ -19,7 +19,7 @@ namespace FreakCat.MangaReader.ViewModel
     public class Page2ViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
-        private TileInfo _tileInfo;
+        private readonly TileInfo _tileInfo;
         private MangaInfo _pagesInfo;
         private ICommand _toReadCommand;
         private ICommand _onLoadCommand;
@@ -30,22 +30,7 @@ namespace FreakCat.MangaReader.ViewModel
             if (_navigationService.NavigatedParametr is TileInfo)
             {
                 _tileInfo = (TileInfo)_navigationService.NavigatedParametr;
-                PagesInfo = new MangaInfo()
-                {
-                    Name = _tileInfo.Name,
-                    RusName = _tileInfo.RusName,
-                    AnotherNames = "My love for you is always growing.",
-                    Status = _tileInfo.Status,
-                    DownloadingStatus = "2 главы, перевод продолжается",
-                    Tags = _tileInfo.Tags,
-                    Author = "Shirako, Shin5",
-                    Description = _tileInfo.Description,
-                    Translater = "Alen Greed",
-                    Image = _tileInfo.Image
-                };
-                Chapters = new ObservableCollection<Chapter>();
-                Chapters.Add(new Chapter() {Date = DateTime.Today, Name = "#shin5 - Kekkonshite mo Koishiteru   v1 - 1" });
-                Chapters.Add(new Chapter() { Date = DateTime.Today, Name = "#shin5 - Kekkonshite mo Koishiteru   v1 - 2" });
+                PagesInfo = new MangaInfo {Chapters = new ObservableCollection<Chapter>()};
             }
         }
 
@@ -57,6 +42,11 @@ namespace FreakCat.MangaReader.ViewModel
                 {
                     var parser =new MangachanInfoParser(_tileInfo.UrlToInfo);
                     var nInf =await parser.GetInfoAsync();
+                    nInf.Image = _tileInfo.Image;
+                    nInf.Name = _tileInfo.Name;
+                    nInf.RusName = _tileInfo.RusName;
+                    PagesInfo = nInf;
+
                 }));
             }
         }

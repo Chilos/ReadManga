@@ -33,8 +33,14 @@
               SelectedItem="{Binding SelectedImage, Mode=TwoWay}">
             <FlipView.ItemTemplate>
                 <DataTemplate>
-                    <Image 
-                           Source="{Binding Image, Mode=TwoWay}"/>
+                    <ScrollViewer x:Name="SV_ImageZoom"
+                                  MaxZoomFactor="3"
+                                  MinZoomFactor="1"
+                                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                                  ZoomMode="Enabled">
+                        <Image Width="{Binding Path=ViewportWidth, ElementName=SV_ImageZoom}"
+                               Source="{Binding Image, Mode=TwoWay}" />
+                    </ScrollViewer>
                 </DataTemplate>
             </FlipView.ItemTemplate>
         </FlipView>

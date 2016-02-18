@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -27,7 +28,10 @@ namespace FreakCat.MangaReader.Parsers
                 Author = ParseAuthors(match.Groups["author"].Value).Replace("<font style=\'color:green;\'>","").Replace("</font>",""),
                 DownloadingStatus = match.Groups["dchapt"].Value + match.Groups["dstatus"].Value,
                 Status = match.Groups["status"].Value,
-                Translater = ParseAuthors(match.Groups["transl"].Value)
+                Translater = ParseAuthors(match.Groups["transl"].Value),
+                Tags = ParseTags(pageHtml),
+                Description = ParseDescription(pageHtml),
+                Chapters = ParseChapters(pageHtml)
             };
             return inf;
         }
@@ -67,6 +71,51 @@ namespace FreakCat.MangaReader.Parsers
             }
             
             return string.IsNullOrEmpty(res)?"": res.Remove((res.Length - 4),4);
+        }
+
+        private ObservableCollection<Tag> ParseTags(string pageHtml)
+        {
+            string patrn = "<li class='sidetag'>(?<name>.*?)</li>";
+            string patrn1 = "<a href='(?<url>.*?)'>(?<name>.*?)</a>";
+            RegexOptions options = RegexOptions.Compiled | RegexOptions.Singleline;
+            Regex r = new Regex(patrn, options);
+            var res = new ObservableCollection<Tag>();
+            foreach (Match math in r.Matches(pageHtml))
+            {
+                Regex r1 = new Regex(patrn1, options);
+                foreach (Match st in r1.Matches(math.Groups["name"].Value))
+                {
+                    if(st.Groups["name"].Value =="+"|| st.Groups["name"].Value == "-")
+                        continue;
+                    res.Add(new Tag() { Name = st.Groups["name"].Value, Url = st.Groups["url"].Value });
+                }
+            }
+            return res;
+        }
+
+        private string ParseDescription(string pageHtml)
+        {
+            string patrn = "<div id=\"description\" style=\"(.*?)\">(?<name>.*?)<div";
+            RegexOptions options = RegexOptions.Compiled | RegexOptions.Singleline;
+            Regex r = new Regex(patrn, options);
+            return r.Match(pageHtml).Groups["name"].Value;
+        }
+
+        private ObservableCollection<Chapter> ParseChapters(string pageHtml)
+        {
+            string patrn = "<td>(\\W*)<div class='manga'>(\\W*)<a href='(?<url>.*?)'(.*?)>(?<name>.*?)</a>(\\W*)</div>(\\W*)</td>(\\W*)<td>(\\W*)<div class='date'>(?<date>.*?)</div>(\\W*)</td>(\\W*)</tr>";
+            RegexOptions options = RegexOptions.Compiled | RegexOptions.Singleline;
+            Regex r = new Regex(patrn, options);
+            var res = new ObservableCollection<Chapter>();
+            foreach (Match math in r.Matches(pageHtml))
+            {
+                //Girl the Wild's &nbsp;&nbsp;v2 - 219 &nbsp;&nbsp;</span>
+                var st = math.Groups["name"].Value;
+                st = st.Replace("&nbsp;&nbsp;", " ");
+                st = st.Replace("</span>", " ");
+                res.Add(new Chapter() {Name = st, Date = math.Groups["date"].Value, Url = math.Groups["url"].Value});
+            }
+            return res;
         }
     }
 }

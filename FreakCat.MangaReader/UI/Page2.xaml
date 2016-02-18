@@ -246,6 +246,7 @@
                         <TextBlock FontSize="22"
                                    Foreground="White"
                                    Margin="10"
+                                   TextWrapping="WrapWholeWords"
                                    Text="{Binding PagesInfo.Description, Mode=TwoWay}" />
                     </Grid>
                 </RelativePanel>
@@ -275,7 +276,7 @@
                         </Grid>
                         <Border Height="2"
                                 Background="White"/>
-                        <ListView ItemsSource="{Binding Chapters}"
+                        <ListView ItemsSource="{Binding PagesInfo.Chapters}"
                                   Name="ChaptersListView"
                                   SelectionMode="None">
                             <ListView.ItemsPanel>
