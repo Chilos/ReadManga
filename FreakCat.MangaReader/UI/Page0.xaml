@@ -20,10 +20,11 @@
     <Grid Background="#feeed7">
         <Grid.Resources>
             <converter:ParallaxConverter x:Key="Parallax"/>
+            <converter:VisibleConverter x:Key="Visible"/>
         </Grid.Resources>
-        <Image Source="/Assets/tsukin_zajiro.jpg" 
+        <Image Source="/Assets/japan-s-anime-i-manga2.jpg" 
                HorizontalAlignment="Left"
-               Opacity="0.3"
+               Opacity="0.7"
                VerticalAlignment="Top"
                Stretch="UniformToFill"
                Height="1500"
@@ -53,5 +54,15 @@
 
             </ListView>
         </ScrollViewer>
+        <Grid Visibility="{Binding ProcessingRingVisible, Converter={StaticResource Visible}}">
+            <Grid Background="Black"
+                  Opacity=".5"/>
+            <ProgressRing HorizontalAlignment="Center"
+                          VerticalAlignment="Center" 
+                          Width="100"
+                          Height="100"
+                          IsActive="True"
+                          Visibility="Visible"/>
+        </Grid>
     </Grid>
 </Page>

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
@@ -15,6 +13,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using FreakCat.MangaReader.Model.Entities;
+using FreakCat.MangaReader.Parsers;
 using FreakCat.MangaReader.UI;
 using FreakCat.MangaReader.UI.Navigate;
 using GalaSoft.MvvmLight;
@@ -31,6 +30,7 @@ namespace FreakCat.MangaReader.ViewModel
         private MangaImage _selectedImage;
         private readonly INavigationService _navigationService;
         public ObservableCollection<MangaImage> ImageCollection { get; set; }
+        private string _pagesUrl;
 
         public async Task<WriteableBitmap> qqqq(string url)
         {
@@ -58,6 +58,10 @@ namespace FreakCat.MangaReader.ViewModel
         {
             _navigationService = navigationService;
             ImageCollection = new ObservableCollection<MangaImage>();
+            if (_navigationService.NavigatedParametr is string)
+            {
+                _pagesUrl = (string) _navigationService.NavigatedParametr;
+            }
         }
 
         public MangaImage SelectedImage
@@ -90,6 +94,8 @@ namespace FreakCat.MangaReader.ViewModel
                     //var tmp = _navigationService.CurrentFrame;
                     //var view = ApplicationView.GetForCurrentView();
                     //view.TryEnterFullScreenMode();
+                    var parser = new MangachanPageParser(_pagesUrl);
+                    parser.GetMangaImagesAsync(ImageCollection);
                     ImageCollection.Add(new MangaImage()
                     {
                         Title = "#shin5 - Kekkonshite mo Koishiteru",

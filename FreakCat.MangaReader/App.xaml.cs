@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -42,6 +43,9 @@ namespace FreakCat.MangaReader
         /// <param name="e">Сведения о запросе и обработке запуска.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            var appView = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView();
+            appView.TitleBar.BackgroundColor = Color.FromArgb(0xff, 0x41, 0x3c, 0x35);
+            appView.TitleBar.ButtonBackgroundColor = Color.FromArgb(0xff, 0x41, 0x3c, 0x35);
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)

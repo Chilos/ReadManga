@@ -18,6 +18,7 @@ namespace FreakCat.MangaReader.Parsers
         private const string CATALOG_URL = @"http://mangachan.ru/mostfavorites";
         private const string SITE_URL = @"http://mangachan.ru";
 
+
         public async void GetCatalogAsync(ObservableCollection<TileInfo> collection)
         {
             var str = await GetHtmlPage();
@@ -51,7 +52,7 @@ namespace FreakCat.MangaReader.Parsers
         {
             return new TileInfo()
             {
-                Name = GetTileName(ParseTileBigName(htmlTile)),
+                EnName = GetTileName(ParseTileBigName(htmlTile)),
                 RusName = GetTileRusName(ParseTileBigName(htmlTile)),
                 IsEnded = IsEndedStatus(GetStatusesHtml(htmlTile)),
                 IsSingle = IsSingleStatus(GetStatusesHtml(htmlTile)),

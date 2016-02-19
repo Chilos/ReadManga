@@ -31,7 +31,8 @@ namespace FreakCat.MangaReader.Parsers
                 Translater = ParseAuthors(match.Groups["transl"].Value),
                 Tags = ParseTags(pageHtml),
                 Description = ParseDescription(pageHtml),
-                Chapters = ParseChapters(pageHtml)
+                Chapters = ParseChapters(pageHtml),
+                ReadUrl = ParseReadUrl(pageHtml)
             };
             return inf;
         }
@@ -116,6 +117,14 @@ namespace FreakCat.MangaReader.Parsers
                 res.Add(new Chapter() {Name = st, Date = math.Groups["date"].Value, Url = math.Groups["url"].Value});
             }
             return res;
+        }
+        //<a class="" href="/online/146402-red-storm_v1_ch0.html" title="Читать Red Storm онлайн">Читать онлайн</a>
+        private string ParseReadUrl(string pageHtml)
+        {
+            string patrn = "<a class=\"\" href=\"(?<url>.*?)\" title=\"Читать(.*?)онлайн\">";
+            RegexOptions options = RegexOptions.Compiled | RegexOptions.Singleline;
+            Regex r = new Regex(patrn, options);
+            return r.Match(pageHtml).Groups["url"].Value;
         }
     }
 }

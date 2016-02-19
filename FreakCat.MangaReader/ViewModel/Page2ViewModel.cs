@@ -23,7 +23,9 @@ namespace FreakCat.MangaReader.ViewModel
         private MangaInfo _pagesInfo;
         private ICommand _toReadCommand;
         private ICommand _onLoadCommand;
-        public ObservableCollection<Chapter> Chapters { get; set; } 
+        public ObservableCollection<Chapter> Chapters { get; set; }
+        private bool _processingRingVisible;
+        private bool _mainViewVisible;
         public Page2ViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
@@ -31,6 +33,26 @@ namespace FreakCat.MangaReader.ViewModel
             {
                 _tileInfo = (TileInfo)_navigationService.NavigatedParametr;
                 PagesInfo = new MangaInfo {Chapters = new ObservableCollection<Chapter>()};
+                MainViewVisible = false;
+            }
+        }
+
+        public bool ProcessingRingVisible
+        {
+            get { return _processingRingVisible; }
+            set
+            {
+                _processingRingVisible = value;
+                RaisePropertyChanged(() => ProcessingRingVisible);
+            }
+        }
+        public bool MainViewVisible
+        {
+            get { return _mainViewVisible; }
+            set
+            {
+                _mainViewVisible = value;
+                RaisePropertyChanged(() => MainViewVisible);
             }
         }
 
@@ -40,10 +62,11 @@ namespace FreakCat.MangaReader.ViewModel
             {
                 return _onLoadCommand ?? (_onLoadCommand = new RelayCommand(async () =>
                 {
+                    ProcessingRingVisible = true;
                     var parser =new MangachanInfoParser(_tileInfo.UrlToInfo);
                     var nInf =await parser.GetInfoAsync();
                     nInf.Image = _tileInfo.Image;
-                    nInf.Name = _tileInfo.Name;
+                    nInf.EnName = _tileInfo.EnName;
                     nInf.RusName = _tileInfo.RusName;
                     PagesInfo = nInf;
 
@@ -57,7 +80,7 @@ namespace FreakCat.MangaReader.ViewModel
             {
                 return _toReadCommand ?? (_toReadCommand = new RelayCommand(()=>
                 {
-                    _navigationService.Navigate(typeof(Page3));
+                    _navigationService.Navigate(typeof(Page3), PagesInfo.ReadUrl);
 
                 }));
             }
@@ -70,6 +93,8 @@ namespace FreakCat.MangaReader.ViewModel
             {
                 _pagesInfo = value;
                 RaisePropertyChanged(() => PagesInfo);
+                ProcessingRingVisible = false;
+                MainViewVisible = true;
             }
         }
 

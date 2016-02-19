@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using FreakCat.MangaReader.UI.Navigate;
+using FreakCat.MangaReader.ViewModel;
 
 // Шаблон элемента пустой страницы задокументирован по адресу http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +27,11 @@ namespace FreakCat.MangaReader.UI
         public Page3()
         {
             this.InitializeComponent();
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            DataContext = new Page3ViewModel(new NavigationService(this.Frame) { NavigatedParametr = e.Parameter });
         }
     }
 }

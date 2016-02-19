@@ -2,9 +2,7 @@
     x:Class="FreakCat.MangaReader.UI.Controls.MenuTileControl1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FreakCat.MangaReader.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:toolkit="using:WinRTXamlToolkit.Controls"
     xmlns:converter="using:FreakCat.MangaReader.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
@@ -22,9 +20,10 @@
     </UserControl.Resources>
     <Grid>
         <Image VerticalAlignment="Top"
-                   Width="213"
-                   Source="{x:Bind Tile.Image}"
-                   Height="301"/>
+               Width="213"
+               Source="{x:Bind Tile.Image}"
+               Stretch="UniformToFill"
+               Height="301" />
         <RelativePanel Width="213"
                        Height="300">
             <Grid RelativePanel.AlignBottomWithPanel="True">
@@ -33,15 +32,13 @@
                         Width="213"
                         Height="100"/>
                 <StackPanel>
-                    <TextBlock x:Name="Name"
-                               HorizontalAlignment="Center"
+                    <TextBlock HorizontalAlignment="Center"
                                Margin="0,10,0,0"
                                FontSize="18"
-                               Text="{x:Bind Tile.Name}"
+                               Text="{x:Bind Tile.EnName}"
                                Foreground="White" 
                                TextWrapping="WrapWholeWords" />
-                    <TextBlock x:Name="RusName"
-                               HorizontalAlignment="Center"
+                    <TextBlock HorizontalAlignment="Center"
                                Margin="0,5,0,0"
                                FontSize="14"
                                TextWrapping="WrapWholeWords"

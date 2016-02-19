@@ -46,21 +46,29 @@
                 </Setter>
             </Style>
         <converters:ParallaxConverter x:Key="Parallax"/>
+        <converters:VisibleConverter x:Key="Visible"/>
     </Page.Resources>
     <Grid Background="#feeed7">
-        <Image Source="/Assets/tsukin_zajiro.jpg" 
-               HorizontalAlignment="Left"
-               Opacity="0.3"
-               VerticalAlignment="Top"
-               Stretch="UniformToFill"
-               Height="1500"
-               Margin="0,0,0,-780">
-            <Image.RenderTransform>
-                <CompositeTransform
-                    TranslateY="{Binding ElementName=MainScrollViewer, Path=VerticalOffset, Converter={StaticResource Parallax}, ConverterParameter=-0.10}" />
-            </Image.RenderTransform>
-        </Image>
-        <ScrollViewer x:Name="MainScrollViewer" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Disabled">
+        <ScrollViewer x:Name="SvImageZoom"
+                      MaxZoomFactor="3"
+                      MinZoomFactor="1"
+                      VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                      ZoomMode="Enabled">
+            <Image Source="/Assets/japan-s-anime-i-manga2.jpg"
+                   HorizontalAlignment="Left"
+                   Width="{Binding Path=ViewportWidth, ElementName=SvImageZoom}"
+                   Opacity="0.7"
+                   VerticalAlignment="Top">
+                <Image.RenderTransform>
+                    <CompositeTransform
+                        TranslateY="{Binding ElementName=MainScrollViewer, Path=VerticalOffset, Converter={StaticResource Parallax}, ConverterParameter=-0.10}" />
+                </Image.RenderTransform>
+            </Image>
+        </ScrollViewer>
+        <ScrollViewer x:Name="MainScrollViewer"
+                      Visibility="{Binding MainViewVisible, Converter={StaticResource Visible}}"
+                      VerticalScrollMode="Enabled"
+                      HorizontalScrollBarVisibility="Disabled">
             <StackPanel>
                 <RelativePanel>
                     <Grid Name="MainImage"
@@ -85,7 +93,7 @@
                                 Margin="10"
                                 Foreground="White"
                                 TextWrapping="WrapWholeWords"
-                                Text="{Binding PagesInfo.Name, Mode=TwoWay}" />
+                                Text="{Binding PagesInfo.EnName, Mode=TwoWay}" />
                        
                     </Grid>
                     <Grid RelativePanel.RightOf="MainImage"
@@ -320,5 +328,15 @@
                 </Grid>
             </StackPanel>
         </ScrollViewer>
+        <Grid Visibility="{Binding ProcessingRingVisible, Converter={StaticResource Visible}}">
+            <Grid Background="Black"
+                  Opacity=".5"/>
+            <ProgressRing HorizontalAlignment="Center"
+                          VerticalAlignment="Center" 
+                          Width="100"
+                          Height="100"
+                          IsActive="True"
+                          Visibility="Visible"/>
+        </Grid>
     </Grid>
 </Page>

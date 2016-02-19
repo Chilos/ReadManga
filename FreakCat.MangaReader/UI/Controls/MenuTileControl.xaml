@@ -19,18 +19,18 @@
                     <ControlTemplate TargetType="Button">
                         <Grid>
                             <Border Name="Border" BorderThickness="1"
-                                    
+
                                     CornerRadius="3"
                                     BorderBrush="White">
                                 <Border.Background>
-                                    <SolidColorBrush x:Name="ColorBrush" Color="Transparent"/>
+                                    <SolidColorBrush x:Name="ColorBrush" Color="Transparent" />
                                 </Border.Background>
-                                <TextBlock 
-                                           FontSize="12"
-                                           Margin="1"
-                                           Text="{TemplateBinding Content}">
+                                <TextBlock
+                                    FontSize="12"
+                                    Margin="1"
+                                    Text="{TemplateBinding Content}">
                                     <TextBlock.Foreground>
-                                        <SolidColorBrush x:Name="ColorBrushForeground" Color="White"/>
+                                        <SolidColorBrush x:Name="ColorBrushForeground" Color="White" />
                                     </TextBlock.Foreground>
                                 </TextBlock>
                             </Border>
@@ -49,12 +49,12 @@
                                     <VisualState x:Name="Pressed">
                                         <Storyboard>
                                             <ColorAnimationUsingKeyFrames Storyboard.TargetName="ColorBrush"
-                                                                           Storyboard.TargetProperty="Color">
-                                                <LinearColorKeyFrame KeyTime="0:0:0" Value="White"/>
+                                                                          Storyboard.TargetProperty="Color">
+                                                <LinearColorKeyFrame KeyTime="0:0:0" Value="White" />
                                             </ColorAnimationUsingKeyFrames>
                                             <ColorAnimationUsingKeyFrames Storyboard.TargetName="ColorBrushForeground"
-                                                                           Storyboard.TargetProperty="Color">
-                                                <LinearColorKeyFrame KeyTime="0:0:0" Value="CadetBlue"/>
+                                                                          Storyboard.TargetProperty="Color">
+                                                <LinearColorKeyFrame KeyTime="0:0:0" Value="CadetBlue" />
                                             </ColorAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -69,7 +69,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid HorizontalAlignment="Center"
-          VerticalAlignment="Center">
+              VerticalAlignment="Center">
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="Tapped">
                     <core:InvokeCommandAction Command="{x:Bind Command, Mode=TwoWay}" CommandParameter="{Binding}" />
@@ -80,34 +80,32 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0"
-               VerticalAlignment="Top"
-               Width="68"
-               Source="{x:Bind Tile.Image}"
-               Height="95" />
+                   VerticalAlignment="Top"
+                   Width="68"
+                   Source="{x:Bind Tile.Image}"
+                   Height="95" />
             <StackPanel Grid.Column="1">
-                <TextBlock x:Name="Name"
-                       VerticalAlignment="Top"
-                       HorizontalAlignment="Left"
-                       Margin="5,0,0,0"
-                       FontSize="16"
-                       Text="{x:Bind Tile.Name}"
-                       Foreground="White"/>
                 <TextBlock VerticalAlignment="Top"
-                       HorizontalAlignment="Left"
-                       FontSize="12"
-                       Margin="5,5,0,0"
-                       Text="{x:Bind Tile.RusName}" 
-                       Foreground="White"/>
+                           HorizontalAlignment="Left"
+                           Margin="5,0,0,0"
+                           FontSize="16"
+                           Text="{x:Bind Tile.EnName}"
+                           Foreground="White" />
                 <TextBlock VerticalAlignment="Top"
-                       HorizontalAlignment="Left"
-                       Name="Status"
-                       FontSize="12"
-                       Margin="5,5,0,0"
-                       Text="{x:Bind Tile.Status}" 
-                       Foreground="White"/>
+                           HorizontalAlignment="Left"
+                           FontSize="12"
+                           Margin="5,5,0,0"
+                           Text="{x:Bind Tile.RusName}"
+                           Foreground="White" />
+                <TextBlock VerticalAlignment="Top"
+                           HorizontalAlignment="Left"
+                           FontSize="12"
+                           Margin="5,5,0,0"
+                           Text="{x:Bind Tile.Status}"
+                           Foreground="White" />
                 <Border Height="1" Background="White"
                         Opacity="0.9"
-                        Margin="5,5,0,0"/>
+                        Margin="5,5,0,0" />
                 <TextBlock VerticalAlignment="Top"
                            HorizontalAlignment="Left"
                            FontSize="12"
@@ -118,21 +116,21 @@
                            TextWrapping="WrapWholeWords" />
                 <Border Height="1" Background="White"
                         Opacity="0.9"
-                        Margin="5,2,0,5"/>
+                        Margin="5,2,0,5" />
                 <ItemsControl ItemsSource="{x:Bind Tile.Tags}"
-                          HorizontalAlignment="Left"
-                          Margin="5,5,0,0">
+                              HorizontalAlignment="Left"
+                              Margin="5,5,0,0">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <toolkit:WrapPanel Orientation="Horizontal"
-                                           Width="{Binding ElementName=Name, Path=ActualWidth}"/>
+                                               Width="{Binding ElementName=Name, Path=ActualWidth}" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Button Content="{Binding Name}"
-                                Style="{StaticResource TagStyle}"
-                                Margin="2"/>
+                                    Style="{StaticResource TagStyle}"
+                                    Margin="2" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
