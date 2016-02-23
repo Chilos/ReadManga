@@ -27,32 +27,12 @@ namespace FreakCat.MangaReader.ViewModel
     {
         private ICommand _goBack;
         private ICommand _onLoadCommand;
+        private bool _processingRingVisible;
         private MangaImage _selectedImage;
         private readonly INavigationService _navigationService;
         public ObservableCollection<MangaImage> ImageCollection { get; set; }
         private string _pagesUrl;
 
-        public async Task<WriteableBitmap> qqqq(string url)
-        {
-            var bytes =  new HttpClient().GetByteArrayAsync(url).Result;
-
-            // Create an instance of the decoder
-            var webp = new WebPDecoder();
-
-            // Decode to BGRA (Bitmaps use this format)
-            var pixelData1 = await webp.DecodeBgraAsync(bytes);
-            var pixelData = pixelData1.ToArray();
-            // Get the size
-            var size = await webp.GetSizeAsync(bytes);
-
-            // With the size of the webp, create a WriteableBitmap
-            var bitmap = new WriteableBitmap((int)size.Width, (int)size.Height);
-
-            // Write the pixel data to the buffer
-            var stream = bitmap.PixelBuffer.AsStream();
-            await stream.WriteAsync(pixelData, 0, pixelData.Length);
-            return bitmap;
-        }
 
         public Page3ViewModel(INavigationService navigationService)
         {
@@ -64,6 +44,15 @@ namespace FreakCat.MangaReader.ViewModel
             }
         }
 
+        public bool ProcessingRingVisible
+        {
+            get { return _processingRingVisible; }
+            set
+            {
+                _processingRingVisible = value;
+                RaisePropertyChanged(() => ProcessingRingVisible);
+            }
+        }
         public MangaImage SelectedImage
         {
             get { return _selectedImage; }
@@ -89,37 +78,24 @@ namespace FreakCat.MangaReader.ViewModel
         {
             get
             {
-                return _onLoadCommand ?? (_onLoadCommand = new RelayCommand( async () =>
+                return _onLoadCommand ?? (_onLoadCommand = new RelayCommand(() =>
                 {
                     //var tmp = _navigationService.CurrentFrame;
                     //var view = ApplicationView.GetForCurrentView();
                     //view.TryEnterFullScreenMode();
+                    ProcessingRingVisible = true;
                     var parser = new MangachanPageParser(_pagesUrl);
-                    parser.GetMangaImagesAsync(ImageCollection);
-                    ImageCollection.Add(new MangaImage()
-                    {
-                        Title = "#shin5 - Kekkonshite mo Koishiteru",
-                        Image =
-                            await
-                                qqqq(
-                                    @"http://img2.mangachan.ru/manganew_webp/-9new/f/1455435592_fuuka_v10_ch95/01._.webp"),
-                        Chapter = "Том 10 Глава 95",
-                        PageNamber = "1/4"
-                    });
-                    ImageCollection.Add(new MangaImage()
-                    {
-                        Title = "#shin5 - Kekkonshite mo Koishiteru",
-                        Image =
-                            await
-                                qqqq(
-                                    @"http://img2.mangachan.ru/manganew_webp/-9new/f/1455435592_fuuka_v10_ch95/02._.webp"),
-                        Chapter = "Том 10 Глава 95",
-                        PageNamber = "2/4"
-                    });
+                    ImageCollection.CollectionChanged += ImageCollection_CollectionChanged;
+                     parser.GetMangaImagesAsync(ImageCollection);
+
 
                 }));
             }
         }
 
+        private void ImageCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            ProcessingRingVisible = false;
+        }
     }
 }

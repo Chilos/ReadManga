@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:converters="using:FreakCat.MangaReader.Converters"
     DataContext="{Binding Page3, Source={StaticResource Locator}}"
     mc:Ignorable="d">
     <interactivity:Interaction.Behaviors>
@@ -19,6 +20,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/MainPageStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <converters:VisibleConverter x:Key="Visible"/>
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
@@ -29,7 +31,7 @@
         </Grid.RowDefinitions>
         <FlipView Background="White"
               Grid.RowSpan="3"
-              ItemsSource="{Binding ImageCollection}"
+              ItemsSource="{Binding ImageCollection, Mode=TwoWay}"
               SelectedItem="{Binding SelectedImage, Mode=TwoWay}">
             <FlipView.ItemTemplate>
                 <DataTemplate>
@@ -77,7 +79,17 @@
                        VerticalAlignment="Top"
                        Text="{Binding SelectedImage.PageNamber}"/>
         </Grid>
-    
+        <Grid Visibility="{Binding ProcessingRingVisible, Converter={StaticResource Visible}}"
+              Grid.RowSpan="3">
+            <Grid Background="Black"
+                  Opacity=".5"/>
+            <ProgressRing HorizontalAlignment="Center"
+                          VerticalAlignment="Center" 
+                          Width="100"
+                          Height="100"
+                          IsActive="True"
+                          Visibility="Visible"/>
+        </Grid>
 
     </Grid>
 </Page>
