@@ -30,10 +30,13 @@ namespace FreakCat.MangaReader.Parsers
         {          
             string previewPageHtml = await GetHtmlPage(_mangaImageUrl);
             int count = ParsePagesCount(previewPageHtml);
+            for(int i=0;i<count;i++)
+                mangaImages.Add(new MangaImage());
+
             for (int i = 0; i < count; i++)
             {
-                var el = await GetElement($"{_mangaImageUrl}#page={i + 1}", $"{i + 1}/{count}");
-                mangaImages.Add(el);    
+                mangaImages[i] = await GetElement($"{_mangaImageUrl}#page={i + 1}", $"{i + 1}/{count}");
+                //mangaImages.Add(el);    
             }
 
         }

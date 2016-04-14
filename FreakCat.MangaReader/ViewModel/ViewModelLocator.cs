@@ -8,7 +8,6 @@ using Windows.UI.Xaml.Controls;
 using FreakCat.MangaReader.UI;
 using FreakCat.MangaReader.UI.Navigate;
 using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
 
 namespace FreakCat.MangaReader.ViewModel
 {
